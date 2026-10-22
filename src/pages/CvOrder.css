@@ -30,23 +30,28 @@
 
 .cv-order__preview {
   width: 100%;
+  /* min-width:0 est indispensable : sans ca, un enfant a aspect-ratio dans
+     une piste de grille "fr" peut forcer sa taille de contenu intrinseque
+     et faire deborder toute la grille horizontalement. */
+  min-width: 0;
+  /* Permet a .cv-order__preview-scale de calculer son echelle depuis la
+     largeur REELLE de ce conteneur (cqw), au lieu d'un facteur fixe qui
+     rognait l'apercu sur les ecrans etroits (telephones). */
+  container-type: inline-size;
+  aspect-ratio: 794 / 1123;
   overflow: hidden;
-  display: flex;
-  justify-content: center;
+  position: sticky;
+  top: 24px;
   background: var(--color-bg-alt);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
-  height: 560px;
-  position: sticky;
-  top: 24px;
 }
 
 .cv-order__preview-scale {
   width: 794px;
   height: 1123px;
-  transform: scale(0.49);
-  transform-origin: top center;
-  margin-top: 20px;
+  transform: scale(calc(100cqw / 794px));
+  transform-origin: top left;
 }
 
 .cv-form__block {
@@ -74,6 +79,13 @@
 
 @media (max-width: 640px) {
   .cv-form__row2 {
+    grid-template-columns: 1fr;
+  }
+
+  /* minmax(140px, 1fr) oblige chaque colonne a au moins 140px : avec 3-4
+     champs par ligne (Formation/Experience), ca depasse un ecran de
+     telephone et fait deborder toute la page horizontalement. */
+  .cv-form__repeat-row {
     grid-template-columns: 1fr;
   }
 }

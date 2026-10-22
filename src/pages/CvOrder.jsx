@@ -42,6 +42,27 @@ function isRowStarted(row) {
   return Object.entries(row).some(([key, v]) => key !== 'level' && String(v ?? '').trim() !== '');
 }
 
+// Construit les donnees pretes a afficher/envoyer : filtre les lignes jamais
+// remplies (restees au defaut) pour qu'une section vide ne s'affiche ni dans
+// l'apercu ni dans le CV final genere - meme logique utilisee pour les deux,
+// afin que ce que l'acheteur voit soit exactement ce qu'il recoit.
+function buildCleanCvData(form) {
+  return {
+    ...form,
+    hobbies: form.hobbies.split(',').map((h) => h.trim()).filter(Boolean),
+    education: form.education.filter(isRowStarted),
+    experience: form.experience
+      .filter(isRowStarted)
+      .map((item) => ({
+        ...item,
+        bullets: item.bullets.split('\n').map((b) => b.trim()).filter(Boolean),
+      })),
+    projects: form.projects.filter(isRowStarted),
+    skills: form.skills.filter((row) => row.name.trim()),
+    languages: form.languages.filter((row) => row.name.trim()),
+  };
+}
+
 function RepeatableSection({ title, rows, fields, onChange, onAdd, onRemove, rowErrors }) {
   return (
     <div className="cv-form__repeat">
@@ -138,14 +159,7 @@ function CvOrder() {
     setPhotoPreview(URL.createObjectURL(file));
   };
 
-  const previewData = {
-    ...form,
-    hobbies: form.hobbies.split(',').map((h) => h.trim()).filter(Boolean),
-    experience: form.experience.map((item) => ({
-      ...item,
-      bullets: item.bullets.split('\n').map((b) => b.trim()).filter(Boolean),
-    })),
-  };
+  const previewData = buildCleanCvData(form);
 
   const validate = () => {
     const newFieldErrors = {};
@@ -206,14 +220,7 @@ function CvOrder() {
     setSubmitError('');
 
     try {
-      const payload = {
-        ...form,
-        hobbies: form.hobbies.split(',').map((h) => h.trim()).filter(Boolean),
-        experience: form.experience.map((item) => ({
-          ...item,
-          bullets: item.bullets.split('\n').map((b) => b.trim()).filter(Boolean),
-        })),
-      };
+      const payload = buildCleanCvData(form);
 
       const data = new FormData();
       data.append('template_id', template.id);
