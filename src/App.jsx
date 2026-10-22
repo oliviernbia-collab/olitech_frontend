@@ -6,6 +6,9 @@ import Services from './pages/Services';
 import About from './pages/About';
 import Portfolio from './pages/Portfolio';
 import Contact from './pages/Contact';
+import CvCatalogue from './pages/CvCatalogue';
+import CvOrder from './pages/CvOrder';
+import CvOrderStatus from './pages/CvOrderStatus';
 import AdminLayout from './components/admin/AdminLayout';
 import ProtectedRoute from './components/admin/ProtectedRoute';
 import AdminLogin from './pages/admin/Login';
@@ -17,6 +20,8 @@ import AdminEntreprise from './pages/admin/Entreprise';
 import AdminTeam from './pages/admin/Team';
 import AdminClients from './pages/admin/Clients';
 import AdminFinances from './pages/admin/Finances';
+import AdminCvTemplates from './pages/admin/CvTemplates';
+import AdminCvOrders from './pages/admin/CvOrders';
 
 function PublicLayout({ children }) {
   return (
@@ -35,6 +40,9 @@ function App() {
       <Route path="/services" element={<PublicLayout><Services /></PublicLayout>} />
       <Route path="/a-propos" element={<PublicLayout><About /></PublicLayout>} />
       <Route path="/realisations" element={<PublicLayout><Portfolio /></PublicLayout>} />
+      <Route path="/cv" element={<PublicLayout><CvCatalogue /></PublicLayout>} />
+      <Route path="/cv/commande/:slug" element={<PublicLayout><CvOrder /></PublicLayout>} />
+      <Route path="/cv/suivi/:reference" element={<PublicLayout><CvOrderStatus /></PublicLayout>} />
       <Route path="/contact" element={<PublicLayout><Contact /></PublicLayout>} />
 
       <Route path="/admin/login" element={<AdminLogin />} />
@@ -55,6 +63,8 @@ function App() {
         <Route path="equipe" element={<AdminTeam />} />
         <Route path="clients" element={<AdminClients />} />
         <Route path="finances" element={<AdminFinances />} />
+        <Route path="cv-modeles" element={<AdminCvTemplates />} />
+        <Route path="cv-commandes" element={<AdminCvOrders />} />
       </Route>
     </Routes>
   );

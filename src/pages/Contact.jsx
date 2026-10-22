@@ -8,7 +8,7 @@ function Contact() {
   const { settings } = useSettings();
   const phone = settings?.phone || '05 54 18 33 78';
   const email = settings?.email || 'oliviernbia@gmail.com';
-  const website = settings?.website || 'www.olitech.fr';
+  const website = settings?.website || 'olitechnologie.com';
   const phoneHref = phone.replace(/\s+/g, '');
   const websiteHref = `https://${website.replace(/^https?:\/\//, '')}`;
 

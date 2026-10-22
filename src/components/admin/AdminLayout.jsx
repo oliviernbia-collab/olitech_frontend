@@ -11,6 +11,7 @@ import {
   faUserGroup,
   faHandshake,
   faSackDollar,
+  faFileLines,
   faRightFromBracket,
   faBars,
   faXmark,
@@ -24,6 +25,8 @@ const mainLinks = [
   { to: '/admin/messages', label: 'Messages', icon: faEnvelope },
   { to: '/admin/services', label: 'Services', icon: faScrewdriverWrench },
   { to: '/admin/realisations', label: 'Réalisations', icon: faBriefcase },
+  { to: '/admin/cv-modeles', label: 'Modèles CV', icon: faFileLines },
+  { to: '/admin/cv-commandes', label: 'Commandes CV', icon: faSackDollar },
 ];
 
 const companyLinks = [
@@ -64,12 +67,7 @@ function AdminLayout() {
       <aside className={`admin-sidebar ${mobileOpen ? 'is-open' : ''}`}>
         <img src={logo} alt="OliTech" className="admin-sidebar__logo" />
         <nav className="admin-sidebar__nav">
-          <a
-            href="/"
-            target="_blank"
-            rel="noreferrer"
-            className="admin-sidebar__external"
-          >
+          <a href="/" className="admin-sidebar__external">
             <FontAwesomeIcon icon={faHouse} /> Accueil
           </a>
 

@@ -10,7 +10,7 @@ function Footer() {
 
   const phone = settings?.phone || '05 54 18 33 78';
   const email = settings?.email || 'oliviernbia@gmail.com';
-  const website = settings?.website || 'www.olitech.fr';
+  const website = settings?.website || 'olitechnologie.com';
   const phoneHref = phone.replace(/\s+/g, '');
 
   return (
@@ -28,6 +28,7 @@ function Footer() {
             <li><a href="/services">Services</a></li>
             <li><a href="/a-propos">A propos</a></li>
             <li><a href="/realisations">Réalisations</a></li>
+            <li><a href="/cv">CV</a></li>
             <li><a href="/contact">Contact</a></li>
           </ul>
         </div>

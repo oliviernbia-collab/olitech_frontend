@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowRight, faPhone } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight, faPhone, faFileLines } from '@fortawesome/free-solid-svg-icons';
 import { useSettings } from '../context/SettingsContext';
 import heroImage1 from '../assets/Dev2.jpg';
 import heroImage2 from '../assets/Dev5.jpg';
@@ -41,6 +41,9 @@ function Hero() {
           <div className="hero__actions">
             <Link to="/contact" className="btn btn-primary">
               Demander un devis <FontAwesomeIcon icon={faArrowRight} />
+            </Link>
+            <Link to="/cv" className="btn btn-outline">
+              <FontAwesomeIcon icon={faFileLines} /> Je veux un CV
             </Link>
             <a href={`tel:${phoneHref}`} className="btn btn-outline">
               <FontAwesomeIcon icon={faPhone} /> {phone}

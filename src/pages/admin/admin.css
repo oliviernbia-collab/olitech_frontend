@@ -302,3 +302,13 @@
     grid-template-columns: repeat(4, 1fr);
   }
 }
+
+.cv-orders__data {
+  background: var(--color-bg-alt);
+  border-radius: 8px;
+  padding: 14px;
+  font-size: 12px;
+  max-height: 300px;
+  overflow: auto;
+  white-space: pre-wrap;
+}

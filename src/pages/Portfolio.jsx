@@ -47,26 +47,26 @@ function Portfolio() {
                   />
                 )}
                 <div className="portfolio-card__body">
-                  {!item.image_url && (
-                    <div className="portfolio-card__icon">
-                      <FontAwesomeIcon icon={getIcon(item.icon_key)} />
-                    </div>
-                  )}
-                  <div>
-                    {item.category && <span className="portfolio-card__category">{item.category}</span>}
-                    <h3>{item.title}</h3>
-                    <p>{item.description}</p>
-                    {item.link && (
-                      <a
-                        href={item.link}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="portfolio-card__link"
-                      >
-                        Voir le projet <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
-                      </a>
+                  <div className="portfolio-card__header">
+                    {!item.image_url && (
+                      <div className="portfolio-card__icon">
+                        <FontAwesomeIcon icon={getIcon(item.icon_key)} />
+                      </div>
                     )}
+                    {item.category && <span className="portfolio-card__category">{item.category}</span>}
                   </div>
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                  {item.link && (
+                    <a
+                      href={item.link}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="portfolio-card__link"
+                    >
+                      Voir le projet <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
+                    </a>
+                  )}
                 </div>
               </article>
             ))}
