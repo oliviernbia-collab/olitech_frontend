@@ -25,17 +25,6 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-      - name: Check port 443 (HTTPS baseline)
-        run: timeout 10 bash -c 'cat < /dev/null > /dev/tcp/${{ secrets.SSH_HOST }}/443'
-
-      - name: Check port 22 (SSH)
-        continue-on-error: true
-        run: timeout 10 bash -c 'cat < /dev/null > /dev/tcp/${{ secrets.SSH_HOST }}/${{ secrets.SSH_PORT }}'
-
-      - name: Check port 21 (FTP)
-        continue-on-error: true
-        run: timeout 10 bash -c 'cat < /dev/null > /dev/tcp/${{ secrets.SSH_HOST }}/21'
-
       - name: Trust remote host
         run: |
           mkdir -p ~/.ssh
