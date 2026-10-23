@@ -25,13 +25,16 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-      - name: Diagnose raw TCP reachability
-        run: |
-          echo "Resolving ${{ secrets.SSH_HOST }} ..."
-          getent hosts "${{ secrets.SSH_HOST }}" || true
-          timeout 10 bash -c 'cat < /dev/null > /dev/tcp/${{ secrets.SSH_HOST }}/${{ secrets.SSH_PORT }}' \
-            && echo "TCP OK: port ${{ secrets.SSH_PORT }} reachable" \
-            || echo "TCP FAIL: port ${{ secrets.SSH_PORT }} NOT reachable from this runner"
+      - name: Check port 443 (HTTPS baseline)
+        run: timeout 10 bash -c 'cat < /dev/null > /dev/tcp/${{ secrets.SSH_HOST }}/443'
+
+      - name: Check port 22 (SSH)
+        continue-on-error: true
+        run: timeout 10 bash -c 'cat < /dev/null > /dev/tcp/${{ secrets.SSH_HOST }}/${{ secrets.SSH_PORT }}'
+
+      - name: Check port 21 (FTP)
+        continue-on-error: true
+        run: timeout 10 bash -c 'cat < /dev/null > /dev/tcp/${{ secrets.SSH_HOST }}/21'
 
       - name: Trust remote host
         run: |
