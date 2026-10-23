@@ -34,7 +34,7 @@ jobs:
         run: |
           set +e
           lftp -u "$FTP_USER,$FTP_PASSWORD" -e "
-            debug 3;
+            debug 3 -o lftp_debug.log;
             set cmd:fail-exit yes;
             set ssl:verify-certificate no;
             set ftp:ssl-allow true;
@@ -47,7 +47,8 @@ jobs:
           " "$FTP_HOST" > lftp_output.log 2>&1
           code=$?
           if [ $code -ne 0 ]; then
-            ESCAPED=$(sed ':a;N;$!ba;s/\n/%0A/g' lftp_output.log)
+            cat lftp_output.log lftp_debug.log > combined.log 2>/dev/null
+            ESCAPED=$(tail -c 3000 combined.log | sed ':a;N;$!ba;s/\n/%0A/g')
             echo "::error::lftp exited $code: $ESCAPED"
             exit $code
           fi
