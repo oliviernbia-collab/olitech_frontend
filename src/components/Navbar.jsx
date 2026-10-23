@@ -24,14 +24,6 @@ function Navbar() {
           <img src={logo} alt="OliTech" />
         </NavLink>
 
-        <button
-          className="navbar__toggle"
-          onClick={() => setOpen((v) => !v)}
-          aria-label="Ouvrir le menu"
-        >
-          <FontAwesomeIcon icon={open ? faXmark : faBars} />
-        </button>
-
         <nav className={`navbar__links ${open ? 'is-open' : ''}`}>
           {links.map((link) => (
             <NavLink
@@ -44,11 +36,21 @@ function Navbar() {
               {link.label}
             </NavLink>
           ))}
-
-          <NavLink to="/admin" className="navbar__admin-btn" onClick={() => setOpen(false)}>
-            <FontAwesomeIcon icon={faUserShield} /> Admin
-          </NavLink>
         </nav>
+
+        <div className="navbar__actions">
+          <NavLink to="/admin" className="navbar__admin-btn" onClick={() => setOpen(false)}>
+            <FontAwesomeIcon icon={faUserShield} /> <span>Admin</span>
+          </NavLink>
+
+          <button
+            className="navbar__toggle"
+            onClick={() => setOpen((v) => !v)}
+            aria-label="Ouvrir le menu"
+          >
+            <FontAwesomeIcon icon={open ? faXmark : faBars} />
+          </button>
+        </div>
       </div>
     </header>
   );

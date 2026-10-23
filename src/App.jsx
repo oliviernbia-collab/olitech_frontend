@@ -1,6 +1,7 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import ScrollToTopButton from './components/ScrollToTopButton';
 import Home from './pages/Home';
 import Services from './pages/Services';
 import About from './pages/About';
@@ -30,6 +31,7 @@ function PublicLayout({ children }) {
       <Navbar />
       <main>{children}</main>
       <Footer />
+      <ScrollToTopButton />
     </div>
   );
 }
