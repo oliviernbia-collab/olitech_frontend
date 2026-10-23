@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { NavLink, Outlet, useNavigate } from 'react-router-dom';
+import { NavLink, Link, Outlet, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faHouse,
@@ -12,6 +12,7 @@ import {
   faHandshake,
   faSackDollar,
   faFileLines,
+  faUser,
   faRightFromBracket,
   faBars,
   faXmark,
@@ -97,7 +98,9 @@ function AdminLayout() {
         </nav>
 
         <div className="admin-sidebar__footer">
-          <p>{admin?.name}</p>
+          <Link to="/admin/profil" className="admin-sidebar__profile-link" onClick={closeMobile}>
+            <FontAwesomeIcon icon={faUser} /> {admin?.name}
+          </Link>
           <button type="button" onClick={handleLogout}>
             <FontAwesomeIcon icon={faRightFromBracket} /> Déconnexion
           </button>

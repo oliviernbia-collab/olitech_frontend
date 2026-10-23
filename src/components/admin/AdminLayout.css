@@ -105,10 +105,19 @@
   padding-top: 16px;
 }
 
-.admin-sidebar__footer p {
+.admin-sidebar__profile-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   margin: 0 0 10px;
   font-size: 0.85rem;
   color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.admin-sidebar__profile-link:hover {
+  color: #fff;
 }
 
 .admin-sidebar__footer button {

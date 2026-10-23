@@ -22,6 +22,7 @@ import AdminClients from './pages/admin/Clients';
 import AdminFinances from './pages/admin/Finances';
 import AdminCvTemplates from './pages/admin/CvTemplates';
 import AdminCvOrders from './pages/admin/CvOrders';
+import AdminProfile from './pages/admin/Profile';
 
 function PublicLayout({ children }) {
   return (
@@ -65,6 +66,7 @@ function App() {
         <Route path="finances" element={<AdminFinances />} />
         <Route path="cv-modeles" element={<AdminCvTemplates />} />
         <Route path="cv-commandes" element={<AdminCvOrders />} />
+        <Route path="profil" element={<AdminProfile />} />
       </Route>
     </Routes>
   );

@@ -22,6 +22,15 @@ export function AuthProvider({ children }) {
     return data.admin;
   };
 
+  // Utilise apres une mise a jour de profil (nom/email/mot de passe) : le
+  // token change (nouveau payload), donc on rafraichit la session comme au login.
+  const updateSession = (newToken, newAdmin) => {
+    localStorage.setItem(TOKEN_KEY, newToken);
+    localStorage.setItem(ADMIN_KEY, JSON.stringify(newAdmin));
+    setToken(newToken);
+    setAdmin(newAdmin);
+  };
+
   const logout = () => {
     localStorage.removeItem(TOKEN_KEY);
     localStorage.removeItem(ADMIN_KEY);
@@ -30,7 +39,7 @@ export function AuthProvider({ children }) {
   };
 
   return (
-    <AuthContext.Provider value={{ token, admin, isAuthenticated: !!token, login, logout }}>
+    <AuthContext.Provider value={{ token, admin, isAuthenticated: !!token, login, logout, updateSession }}>
       {children}
     </AuthContext.Provider>
   );
