@@ -1,0 +1,10 @@
+Options -MultiViews
+RewriteEngine On
+
+# Ne s'applique qu'au domaine d'Olitech, pour ne pas affecter les autres
+# domaines addon dont le dossier se trouve sous cette meme racine cPanel
+# (les regles .htaccess sont heritees par chemin disque, pas par domaine).
+RewriteCond %{HTTP_HOST} ^(www\.)?olitechnologie\.com$
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.html [QSA,L]

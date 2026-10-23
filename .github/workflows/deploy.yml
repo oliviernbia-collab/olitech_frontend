@@ -1,0 +1,45 @@
+name: Deploy frontend
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Set up SSH agent
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Trust remote host
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -p "${{ secrets.SSH_PORT }}" "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts
+
+      # public_html est aussi la racine d'autres domaines addon sur cet hebergement :
+      # on ne synchronise/efface QUE le sous-dossier assets (propre a Olitech), jamais
+      # la racine entiere, pour ne pas toucher aux fichiers des autres sites.
+      - name: Deploy build assets (safe to prune, Olitech-only folder)
+        run: |
+          rsync -az --delete -e "ssh -p ${{ secrets.SSH_PORT }}" \
+            dist/assets/ "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/${{ secrets.SSH_USER }}/public_html/assets/"
+
+      - name: Deploy root files (no delete, folder is shared with other domains)
+        run: |
+          rsync -az -e "ssh -p ${{ secrets.SSH_PORT }}" \
+            dist/index.html dist/logo.png dist/.htaccess \
+            "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/${{ secrets.SSH_USER }}/public_html/"
