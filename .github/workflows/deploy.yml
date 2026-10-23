@@ -28,7 +28,8 @@ jobs:
       - name: Trust remote host
         run: |
           mkdir -p ~/.ssh
-          ssh-keyscan -p "${{ secrets.SSH_PORT }}" "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts
+          ssh-keyscan -T 15 -p "${{ secrets.SSH_PORT }}" "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts || true
+          test -s ~/.ssh/known_hosts
 
       # public_html est aussi la racine d'autres domaines addon sur cet hebergement :
       # on ne synchronise/efface QUE le sous-dossier assets (propre a Olitech), jamais
