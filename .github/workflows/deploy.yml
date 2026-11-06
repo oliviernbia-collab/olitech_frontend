@@ -17,7 +17,11 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      # .env n'est pas dans le depot : sans cette variable le build garderait
+      # l'URL de dev (localhost) et le site en ligne ne joindrait plus l'API.
       - name: Build
+        env:
+          VITE_API_URL: https://api.olitechnologie.com/api
         run: npm run build
 
       - name: Install lftp
