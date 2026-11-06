@@ -27,6 +27,7 @@
   display: flex;
   align-items: center;
   gap: 14px;
+  margin-left: 32px;
 }
 
 .navbar__toggle {
@@ -74,7 +75,21 @@
   background: var(--color-red);
 }
 
+@media (max-width: 1100px) {
+  .navbar__links {
+    gap: 20px;
+  }
+
+  .navbar__actions {
+    margin-left: 20px;
+  }
+}
+
 @media (max-width: 800px) {
+  .navbar__actions {
+    margin-left: 0;
+  }
+
   .navbar__toggle {
     display: block;
   }

@@ -9,6 +9,7 @@ import {
   faGlobe,
   faMobileScreen,
   faRobot,
+  faGraduationCap,
   faEllipsis,
 } from '@fortawesome/free-solid-svg-icons';
 import { faFacebook } from '@fortawesome/free-brands-svg-icons';
@@ -26,6 +27,7 @@ export const iconMap = {
   globe: { icon: faGlobe, label: 'Globe / Site web' },
   mobile: { icon: faMobileScreen, label: 'Mobile' },
   robot: { icon: faRobot, label: 'Robot / Automatisation' },
+  formation: { icon: faGraduationCap, label: 'Formation' },
   ellipsis: { icon: faEllipsis, label: 'Autre' },
 };
 

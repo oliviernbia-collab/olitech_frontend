@@ -8,7 +8,7 @@ function Footer() {
   const year = new Date().getFullYear();
   const { settings } = useSettings();
 
-  const phone = settings?.phone || '05 54 18 33 78';
+  const phone = settings?.phone || '+225 05 54 18 33 78';
   const email = settings?.email || 'oliviernbia@gmail.com';
   const website = settings?.website || 'olitechnologie.com';
   const phoneHref = phone.replace(/\s+/g, '');

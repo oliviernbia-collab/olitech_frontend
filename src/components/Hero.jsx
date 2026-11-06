@@ -14,7 +14,7 @@ const SLIDE_INTERVAL = 5000;
 function Hero() {
   const [activeSlide, setActiveSlide] = useState(0);
   const { settings } = useSettings();
-  const phone = settings?.phone || '05 54 18 33 78';
+  const phone = settings?.phone || '+225 05 54 18 33 78';
   const phoneHref = phone.replace(/\s+/g, '');
 
   useEffect(() => {
